@@ -9,6 +9,9 @@
     <!-- Bootstrap dependencies -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
 </head>
 <body>
     <div class="container">
@@ -68,11 +71,37 @@
         <footer class="footer mt-4">
           <div class="container">
             <p>Control Panel</p>
-            <p><a href="#" id="clear">Clear Table</a> | <a href="/api/tables">API Table Link</a> | <a href="/api/waitlist">API
+            <p> <a href="/api/tables">API Table Link</a> | <a href="/api/waitlist">API
                 Wait List</a>
           </div>
         </footer>
       </div>
+
+      <script type="text/javascript">
+        // Question: What does this code do?
+        $("#add-btn").on("click", function(event) {
+          console.log("hello");
+          event.preventDefault();
+    
+          var newReservation = {
+            name: $("#name").val().trim(),
+            phoneNumber: $("#phoneNumber").val().trim(),
+            email: $("#email").val().trim(),
+            uniqueID: $("#uniqueID").val().trim()
+          };
+
+          console.log(newReservation);
+    
+          // Question: What does this code do??
+          $.post("/api/tables", newReservation)
+            .then(function(data) {
+              console.log(data);
+              alert("Adding table...");
+            });
+    
+        });
+    
+      </script>
     
 
 </body>
